@@ -1,7 +1,7 @@
 var onSignalExit = require('../../')
 
-onSignalExit(function () {
-  console.log('exited with sigint')
+onSignalExit(function (code, signal) {
+  console.log('exited with sigint, ' + code + ', ' + signal)
 })
 
 process.kill(process.pid, 'SIGINT')

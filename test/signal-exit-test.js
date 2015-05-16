@@ -10,7 +10,7 @@ describe('signal-exit', function () {
   it('receives an exit event when a process exits normally', function (done) {
     exec(process.execPath + ' ./test/fixtures/end-of-execution.js', function (err, stdout, stderr) {
       expect(err).to.equal(null)
-      stdout.should.match(/reached end of execution/)
+      stdout.should.match(/reached end of execution, 0, undefined/)
       done()
     })
   })
@@ -18,7 +18,7 @@ describe('signal-exit', function () {
   it('receives an exit event when a process is terminated with sigint', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigint.js', function (err, stdout, stderr) {
       err.signal.should.equal('SIGINT')
-      stdout.should.match(/exited with sigint/)
+      stdout.should.match(/exited with sigint, 130, SIGINT/)
       done()
     })
   })
@@ -26,7 +26,7 @@ describe('signal-exit', function () {
   it('receives an exit event when a process is terminated with sigterm', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigterm.js', function (err, stdout, stderr) {
       err.signal.should.equal('SIGTERM')
-      stdout.should.match(/exited with sigterm/)
+      stdout.should.match(/exited with sigterm, 143, SIGTERM/)
       done()
     })
   })
@@ -34,7 +34,7 @@ describe('signal-exit', function () {
   it('receives an exit event when process.exit() is called', function (done) {
     exec(process.execPath + ' ./test/fixtures/exit.js', function (err, stdout, stderr) {
       err.code.should.equal(32)
-      stdout.should.match(/exited with process\.exit()/)
+      stdout.should.match(/exited with process\.exit\(\), 32, undefined/)
       done()
     })
   })

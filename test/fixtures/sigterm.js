@@ -1,7 +1,7 @@
 var onSignalExit = require('../../')
 
-onSignalExit(function () {
-  console.log('exited with sigterm')
+onSignalExit(function (code, signal) {
+  console.log('exited with sigterm, ' + code + ', ' + signal)
 })
 
 process.kill(process.pid, 'SIGTERM')
