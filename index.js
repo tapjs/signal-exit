@@ -7,10 +7,7 @@ module.exports = function (cb) {
 
   signals.forEach(function (sig) {
     var listener = function () {
-      if (emittedExit) return
-
       process.removeListener(sig, listener)
-      emittedExit = true
       cb()
 
       process.kill(process.pid, sig)
