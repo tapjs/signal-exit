@@ -7,10 +7,12 @@ module.exports = function (cb) {
 
   Object.keys(signals).forEach(function (sig) {
     var listener = function () {
-      process.removeListener(sig, listener)
-      cb(process.exitCode || signals[sig], sig)
-
-      process.kill(process.pid, sig)
+      // If there are no other listeners, do the default action.
+      if (process.listeners(sig).length === 1) {
+        process.removeListener(sig, listener)
+        cb(process.exitCode || signals[sig], sig)
+        process.kill(process.pid, sig)
+      }
     }
 
     try {
