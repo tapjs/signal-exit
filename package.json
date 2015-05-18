@@ -22,7 +22,7 @@
   "homepage": "https://github.com/bcoe/signal-exit",
   "devDependencies": {
     "chai": "^2.3.0",
-    "nyc": "^1.3.0",
+    "nyc": "^2.0.0",
     "standard": "^3.9.0",
     "tap": "^1.0.4"
   }
