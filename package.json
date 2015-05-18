@@ -1,6 +1,6 @@
 {
   "name": "signal-exit",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "when you want process.on('exit') to fire when a process is killed with a signal.",
   "main": "index.js",
   "scripts": {
