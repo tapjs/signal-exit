@@ -1,7 +1,8 @@
 /* global describe, it */
 
 var exec = require('child_process').exec,
-  expect = require('chai').expect
+  expect = require('chai').expect,
+  assert = require('assert')
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -35,6 +36,15 @@ describe('signal-exit', function () {
     exec(process.execPath + ' ./test/fixtures/exit.js', function (err, stdout, stderr) {
       err.code.should.equal(32)
       stdout.should.match(/exited with process\.exit\(\), 32, undefined/)
+      done()
+    })
+  })
+
+  it('does not exit if user handles signal', function (done) {
+    exec(process.execPath + ' ./test/fixtures/signal-listener.js', function (err, stdout, stderr) {
+      assert.equal(err.code, null)
+      assert.equal(err.signal, 'SIGHUP')
+      assert.equal(stdout, 'exited calledListener=4, code=129, signal="SIGHUP"\n')
       done()
     })
   })
