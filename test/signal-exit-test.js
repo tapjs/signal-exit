@@ -48,4 +48,14 @@ describe('signal-exit', function () {
       done()
     })
   })
+
+  it('ensures that if alwaysLast=true, the handler is run last', function (done) {
+    exec(process.execPath + ' ./test/fixtures/signal-last.js', function (err, stdout, stderr) {
+      assert.equal(err.code, null)
+      assert.equal(err.signal, 'SIGHUP')
+      stdout.should.match(/first counter=1/)
+      stdout.should.match(/last counter=2/)
+      done()
+    })
+  })
 })
