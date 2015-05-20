@@ -4,7 +4,8 @@
   "description": "when you want process.on('exit') to fire when a process is killed with a signal.",
   "main": "index.js",
   "scripts": {
-    "test": "standard && nyc tap ./test/*.js"
+    "test": "standard && nyc tap ./test/*.js",
+    "coverage": "nyc report --reporter=lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,8 @@
   "homepage": "https://github.com/bcoe/signal-exit",
   "devDependencies": {
     "chai": "^2.3.0",
-    "nyc": "^2.0.4",
+    "coveralls": "^2.11.2",
+    "nyc": "^2.0.5",
     "standard": "^3.9.0",
     "tap": "^1.0.4"
   }
