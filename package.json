@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && nyc tap ./test/*.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text"
   },
   "repository": {
     "type": "git",
