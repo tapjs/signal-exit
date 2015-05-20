@@ -7,6 +7,8 @@ var exec = require('child_process').exec,
 require('chai').should()
 require('tap').mochaGlobals()
 
+process.env.NYC_TEST = 'yep'
+
 describe('signal-exit', function () {
   it('receives an exit event when a process exits normally', function (done) {
     exec(process.execPath + ' ./test/fixtures/end-of-execution.js', function (err, stdout, stderr) {
