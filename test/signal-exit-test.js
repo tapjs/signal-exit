@@ -1,8 +1,8 @@
 /* global describe, it */
 
 var exec = require('child_process').exec,
-  expect = require('chai').expect// ,
-  // assert = require('assert')
+  expect = require('chai').expect,
+  assert = require('assert')
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -20,6 +20,7 @@ describe('signal-exit', function () {
 
   it('receives an exit event when a process is terminated with sigint', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigint.js', function (err, stdout, stderr) {
+      expect(err.code).to.equal(null)
       stdout.should.match(/exited with sigint, 130, SIGINT/)
       done()
     })
@@ -27,6 +28,7 @@ describe('signal-exit', function () {
 
   it('receives an exit event when a process is terminated with sigterm', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigterm.js', function (err, stdout, stderr) {
+      expect(err.code).to.equal(null)
       stdout.should.match(/exited with sigterm, 143, SIGTERM/)
       done()
     })
