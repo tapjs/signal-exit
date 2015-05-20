@@ -20,12 +20,13 @@ describe('signal-exit', function () {
 
   it('receives an exit event when a process is terminated with sigint', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigint.js', function (err, stdout, stderr) {
+      console.log(err, stdout, stderr)
       err.signal.should.equal('SIGINT')
       stdout.should.match(/exited with sigint, 130, SIGINT/)
       done()
     })
   })
-
+/*
   it('receives an exit event when a process is terminated with sigterm', function (done) {
     exec(process.execPath + ' ./test/fixtures/sigterm.js', function (err, stdout, stderr) {
       err.signal.should.equal('SIGTERM')
@@ -59,5 +60,5 @@ describe('signal-exit', function () {
       stdout.should.match(/last counter=2/)
       done()
     })
-  })
+  })*/
 })
