@@ -1,7 +1,7 @@
 /* global describe, it */
 
 var exec = require('child_process').exec,
-  expect = require('chai').expect,
+  expect = require('chai').expect// ,
   // assert = require('assert')
 
 require('chai').should()
