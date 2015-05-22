@@ -1,10 +1,12 @@
 var onSignalExit = require('../../')
 
+setTimeout(function () {})
+
 var calledListener = 0
 onSignalExit(function (code, signal) {
   console.log('exited calledListener=%j, code=%j, signal=%j',
               calledListener, code, signal)
-}, {maxListeners: 2})
+})
 
 process.on('SIGHUP', listener)
 process.kill(process.pid, 'SIGHUP')

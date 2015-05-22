@@ -12,6 +12,3 @@ onSignalExit(function (code, signal) {
   console.log('first counter=%j, code=%j, signal=%j',
               counter, code, signal)
 })
-
-process.kill(process.pid, 'SIGHUP')
-setTimeout(function () {}, 1000)

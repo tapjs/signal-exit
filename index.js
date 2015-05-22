@@ -1,112 +1,147 @@
+// Note: since nyc uses this module to output coverage, any lines
+// that are in the direct sync flow of nyc's outputCoverage are
+// ignored, since we can never get coverage for them.
 var assert = require('assert')
+var signals = require('./signals.js')
+
+var EE = require('events')
+/* istanbul ignore if */
+if (typeof EE !== 'function') {
+  EE = EE.EventEmitter
+}
+
+var emitter
+if (process.__signal_exit_emitter__) {
+  emitter = process.__signal_exit_emitter__
+} else {
+  emitter = process.__signal_exit_emitter__ = new EE()
+  emitter.count = 0
+  emitter.emitted = {}
+}
 
 module.exports = function (cb, opts) {
   assert.equal(typeof cb, 'function', 'a callback must be provided for exit handler')
 
-  var emittedExit = false,
-    listenerMap = {},
-    listeners = []
-
-  opts = opts || {}
-  opts.minimumListeners = opts.maxListeners || 1
-
-  Object.keys(signals).forEach(function (sig) {
-    var listener = function () {
-      // If there are no other listeners, do the default action.
-      if (process.listeners(sig).length <= opts.maxListeners) {
-        process.removeListener(sig, listener)
-        cb(process.exitCode || signals[sig], sig)
-        process.kill(process.pid, sig)
-      }
-    }
-
-    listenerMap[sig] = listener
-    listeners.push(listener)
-
-    try {
-      process.on(sig, listener)
-    } catch (er) {}
-  })
-
-  var listener = function (code) {
-    if (emittedExit) return
-    emittedExit = true
-    return cb(code, undefined)
+  if (loaded === false) {
+    load()
   }
 
-  listenerMap['exit'] = listener
-  listeners.push(listener)
-  process.on('exit', listener)
+  var ev = 'exit'
+  if (opts && opts.alwaysLast) {
+    ev = 'afterexit'
+    monkeyPatch()
+  }
 
-  if (opts.alwaysLast) monkeyPatchAddListener(listenerMap, listeners)
-}
-
-// in some cases we always want to ensure that the
-// onExit handler registered with signal-exit is
-// the last event handler to fire, e.g, for code coverage.
-function monkeyPatchAddListener (listenerMap, listeners) {
-  var events = Object.keys(listenerMap),
-    listener
-
-  process.on = process.addListener = (function (on) {
-    return function (ev, fn) {
-      for (var i = 0, event; (event = events[i]) !== undefined; i++) {
-        listener = listenerMap[event]
-
-        if (ev === event && listeners.indexOf(fn) === -1) {
-          process.removeListener(ev, listener)
-          var ret = on.call(process, ev, fn)
-          on.call(process, ev, listener)
-          return ret
-        }
-      }
-
-      return on.apply(this, arguments)
+  var remove = function () {
+    emitter.removeListener(ev, cb)
+    if (emitter.listeners('exit').length === 0 &&
+        emitter.listeners('afterexit').length === 0) {
+      unload()
     }
-  })(process.on)
+  }
+  emitter.on(ev, cb)
+
+  return remove
 }
 
-var signals = {
-  'SIGALRM': 142,
-  'SIGBUS': 138,
-  'SIGCLD': undefined,
-  'SIGEMT': undefined,
-  'SIGFPE': 136,
-  'SIGHUP': 129,
-  'SIGILL': 132,
-  'SIGINFO': undefined,
-  'SIGINT': 130, // CTRL^C
-  'SIGIOT': 134,
-  'SIGKILL': 137, // can't be caught, but let's keep it here.
-  'SIGLOST': undefined,
-  'SIGPIPE': 141,
-  'SIGPOLL': undefined,
-  'SIGPROF': 155,
-  'SIGPWR': undefined,
-  'SIGQUIT': 131,
-  'SIGSEGV': 139,
-  'SIGSTKFLT': undefined,
-  'SIGSYS': 140,
-  'SIGTERM': 143, // polite exit code, can be caught.
-  'SIGTRAP': 133,
-  'SIGTSTP': 146,
-  'SIGTTIN': 149,
-  'SIGTTOU': 150,
-  'SIGUNUSED': undefined,
-  'SIGUSR2': 159,
-  'SIGVTALRM': 154,
-  'SIGXCPU': 152,
-  'SIGXFSZ': 153
+module.exports.unload = unload
+function unload () {
+  if (!loaded) {
+    return
+  }
+  loaded = false
+
+  signals.forEach(function (sig) {
+    try {
+      process.removeListener(sig, sigListeners[sig])
+    } catch (er) {}
+  })
+  process.removeListener('exit', onProcessExit)
+  process.removeListener('afterexit', onProcessAfterExit)
+  process.emit = originalProcessEmit
+  emitter.count -= 1
 }
 
-/* var nonFatalSignals = [
-  'SIGWINCH', // resize window.
-  'SIGUSR1', // debugger.
-  'SIGCHLD',
-  'SIGSTOP',
-  'SIGCONT',
-  'SIGIO',
-  'SIGURG',
-  'SIGABRT',
-  'SIGURG' // out of band data.
-] */
+function emit (event, code, signal) {
+  if (emitter.emitted[event]) {
+    return
+  }
+  emitter.emitted[event] = true
+  emitter.emit(event, code, signal)
+}
+
+// { <signal>: <listener fn>, ... }
+var sigListeners = {}
+signals.forEach(function (sig) {
+  sigListeners[sig] = function listener () {
+    // If there are no other listeners, an exit is coming!
+    // Simplest way: remove us and then re-send the signal.
+    // We know that this will kill the process, so we can
+    // safely emit now.
+    var listeners = process.listeners(sig)
+    if (listeners.length === emitter.count) {
+      unload()
+      emit('exit', null, sig)
+      emit('afterexit', null, sig)
+      /* istanbul ignore next */
+      process.kill(process.pid, sig)
+    }
+  }
+})
+
+module.exports.signals = function () {
+  return signals
+}
+
+module.exports.load = load
+
+var loaded = false
+function load () {
+  if (loaded) {
+    return
+  }
+  loaded = true
+
+  // This is the number of onSignalExit's that are in play.
+  // It's important so that we can count the correct number of
+  // listeners on signals, and don't wait for the other one to
+  // handle it instead of us.
+  emitter.count += 1
+
+  signals = signals.filter(function (sig) {
+    try {
+      process.on(sig, sigListeners[sig])
+      return true
+    } catch (er) {
+      return false
+    }
+  })
+
+  process.on('exit', onProcessExit)
+}
+
+function onProcessExit (code) {
+  emit('exit', code, null)
+}
+
+/* istanbul ignore next */
+function onProcessAfterExit (code) {
+  emit('afterexit', code, null)
+}
+
+var originalProcessEmit = process.emit
+function monkeyPatch () {
+  // emit 'afterexit' after the 'exit' event
+  process.emit = function (ev, arg) {
+    if (ev === 'exit') {
+      var ret = originalProcessEmit.apply(this, arguments)
+      /* istanbul ignore next */
+      originalProcessEmit.call(this, 'afterexit', arg)
+      /* istanbul ignore next */
+      return ret
+    }
+    return originalProcessEmit.apply(this, arguments)
+  }
+
+  process.on('afterexit', onProcessAfterExit)
+}
