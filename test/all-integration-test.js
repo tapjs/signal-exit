@@ -20,8 +20,7 @@ describe('all-signals-integration-test', function () {
       sig === 'SIGIOT' ||
       sig === 'SIGABRT' ||
       sig === 'SIGPOLL' ||
-      sig === 'SIGUNUSED' ||
-      sig === 'SIGUSR1'
+      sig === 'SIGUNUSED'
   }
 
   // Exhaustively test every signal, and a few numbers.
@@ -30,6 +29,9 @@ describe('all-signals-integration-test', function () {
     var node = process.execPath
     var js = require.resolve('./fixtures/exiter.js')
     it('exits properly: ' + sig, function (done) {
+      // travis has issues with SIGUSR1 on Node 0.x.10.
+      if (process.env.TRAVIS && sig === 'SIGUSR1') return done()
+
       exec(node + ' ' + js + ' ' + sig, function (err, stdout, stderr) {
         if (sig) {
           assert(err)
