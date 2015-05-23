@@ -4,7 +4,7 @@
   "description": "when you want to fire an event no matter how a process exits.",
   "main": "index.js",
   "scripts": {
-    "test": "standard && nyc tap ./test/*.js",
+    "test": "standard && nyc tap --timeout=240 ./test/*.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {

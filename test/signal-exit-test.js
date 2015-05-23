@@ -9,9 +9,8 @@ require('tap').mochaGlobals()
 
 var onSignalExit = require('../')
 
-process.env.NYC_TEST = 'yep'
-
 describe('signal-exit', function () {
+
   it('receives an exit event when a process exits normally', function (done) {
     exec(process.execPath + ' ./test/fixtures/end-of-execution.js', function (err, stdout, stderr) {
       expect(err).to.equal(null)
@@ -168,6 +167,11 @@ describe('signal-exit', function () {
           throw er
         }
 
+        if (weirdSignal(sig)) {
+          data.wanted[1] = true
+          data.found[1] = !!data.found[1]
+          data.external[1] = !!data.external[1]
+        }
         assert.deepEqual(data.found, data.wanted)
         assert.deepEqual(data.external, data.wanted)
         done()
