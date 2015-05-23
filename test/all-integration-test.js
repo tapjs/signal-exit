@@ -20,7 +20,8 @@ describe('all-signals-integration-test', function () {
       sig === 'SIGIOT' ||
       sig === 'SIGABRT' ||
       sig === 'SIGPOLL' ||
-      sig === 'SIGUNUSED'
+      sig === 'SIGUNUSED' ||
+      sig === 'SIGUSR1'
   }
 
   // Exhaustively test every signal, and a few numbers.
