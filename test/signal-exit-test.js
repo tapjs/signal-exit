@@ -103,6 +103,10 @@ describe('signal-exit', function () {
     })
   })
 
+  // travis does not report signals
+  // when exiting.
+  if (process.env.TRAVIS) return
+
   // These are signals that are aliases for other signals, so
   // the result will sometimes be one of the others.  For these,
   // we just verify that we GOT a signal, not what it is.
