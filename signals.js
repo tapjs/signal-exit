@@ -30,7 +30,6 @@ module.exports = [
   'SIGSYS',
   'SIGTERM',
   'SIGTRAP',
-  'SIGUSR1',
   'SIGUSR2',
   'SIGVTALRM',
   'SIGXCPU',
@@ -46,4 +45,3 @@ if (process.platform === 'linux') {
     'SIGUNUSED'
   )
 }
-
