@@ -105,5 +105,4 @@ describe('signal-exit', function () {
       done()
     })
   })
-
 })
