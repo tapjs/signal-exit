@@ -29,7 +29,6 @@ module.exports = function (cb, opts) {
   var ev = 'exit'
   if (opts && opts.alwaysLast) {
     ev = 'afterexit'
-    monkeyPatch()
   }
 
   var remove = function () {
@@ -56,9 +55,8 @@ function unload () {
       process.removeListener(sig, sigListeners[sig])
     } catch (er) {}
   })
-  process.removeListener('exit', onProcessExit)
-  process.removeListener('afterexit', onProcessAfterExit)
   process.emit = originalProcessEmit
+  process.reallyExit = originalProcessReallyExit
   emitter.count -= 1
 }
 
@@ -82,6 +80,7 @@ signals.forEach(function (sig) {
     if (listeners.length === emitter.count) {
       unload()
       emit('exit', null, sig)
+      /* istanbul ignore next */
       emit('afterexit', null, sig)
       /* istanbul ignore next */
       process.kill(process.pid, sig)
@@ -117,31 +116,32 @@ function load () {
     }
   })
 
-  process.on('exit', onProcessExit)
+  process.emit = processEmit
+  process.reallyExit = processReallyExit
 }
 
-function onProcessExit (code) {
-  emit('exit', code, null)
-}
-
-/* istanbul ignore next */
-function onProcessAfterExit (code) {
-  emit('afterexit', code, null)
+var originalProcessReallyExit = process.reallyExit
+function processReallyExit (code) {
+  process.exitCode = code || 0
+  emit('exit', process.exitCode, null)
+  /* istanbul ignore next */
+  emit('afterexit', process.exitCode, null)
+  /* istanbul ignore next */
+  originalProcessReallyExit.call(process, process.exitCode)
 }
 
 var originalProcessEmit = process.emit
-function monkeyPatch () {
-  // emit 'afterexit' after the 'exit' event
-  process.emit = function (ev, arg) {
-    if (ev === 'exit') {
-      var ret = originalProcessEmit.apply(this, arguments)
-      /* istanbul ignore next */
-      originalProcessEmit.call(this, 'afterexit', arg)
-      /* istanbul ignore next */
-      return ret
+function processEmit (ev, arg) {
+  if (ev === 'exit') {
+    if (arg !== undefined) {
+      process.exitCode = arg
     }
+    var ret = originalProcessEmit.apply(this, arguments)
+    emit('exit', process.exitCode, null)
+    /* istanbul ignore next */
+    emit('afterexit', process.exitCode, null)
+    return ret
+  } else {
     return originalProcessEmit.apply(this, arguments)
   }
-
-  process.on('afterexit', onProcessAfterExit)
 }
