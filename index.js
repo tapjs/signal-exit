@@ -95,6 +95,7 @@ module.exports.signals = function () {
 module.exports.load = load
 
 var loaded = false
+
 function load () {
   if (loaded) {
     return
