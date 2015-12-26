@@ -1,7 +1,8 @@
 /* global describe, it */
 
-var exec = require('child_process').exec,
-  assert = require('assert')
+var exec = require('child_process').exec
+var assert = require('assert')
+var codeToSignal = require('code-to-signal')
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -33,14 +34,16 @@ describe('all-signals-integration-test', function () {
       if (process.env.TRAVIS && sig === 'SIGUSR1') return done()
 
       exec(node + ' ' + js + ' ' + sig, function (err, stdout, stderr) {
+        codeToSignal.shimError(err)
+
         if (sig) {
           assert(err)
           if (!isNaN(sig)) {
             assert.equal(err.code, sig)
           } else if (!weirdSignal(sig)) {
-            if (!process.env.TRAVIS) err.signal.should.equal(sig)
+            err.signal.should.equal(sig)
           } else if (sig) {
-            if (!process.env.TRAVIS) assert(err.signal)
+            assert(err.signal)
           }
         } else {
           assert.ifError(err)

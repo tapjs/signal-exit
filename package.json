@@ -23,6 +23,7 @@
   "homepage": "https://github.com/bcoe/signal-exit",
   "devDependencies": {
     "chai": "^2.3.0",
+    "code-to-signal": "^1.0.2",
     "coveralls": "^2.11.2",
     "nyc": "^2.1.2",
     "standard": "^3.9.0",

@@ -1,8 +1,9 @@
 /* global describe, it */
 
-var exec = require('child_process').exec,
-  expect = require('chai').expect,
-  assert = require('assert')
+var exec = require('child_process').exec
+var expect = require('chai').expect
+var assert = require('assert')
+var codeToSignal = require('code-to-signal')
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -81,13 +82,10 @@ describe('signal-exit', function () {
   // TODO: test on a few non-OSX machines.
   it('removes handlers when fully unwrapped', function (done) {
     exec(process.execPath + ' ./test/fixtures/unwrap.js', function (err, stdout, stderr) {
-      // on Travis CI no err.signal is populated but
-      // err.code is 129 (which I think tends to be SIGHUP).
-      var expectedCode = process.env.TRAVIS ? 129 : null
+      codeToSignal.shimError(err)
 
       assert(err)
-      if (!process.env.TRAVIS) err.signal.should.equal('SIGHUP')
-      expect(err.code).to.equal(expectedCode)
+      err.signal.should.equal('SIGHUP')
       done()
     })
   })
