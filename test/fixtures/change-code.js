@@ -76,7 +76,8 @@ function listener (code, signal) {
 
 function run (opt) {
   console.error(opt)
-  exec(process.execPath + ' ' + __filename + ' ' + opt, function (err, stdout, stderr) {
+  var shell = process.platform === 'win32' ? null : { shell: '/bin/bash' }
+  exec(process.execPath + ' ' + __filename + ' ' + opt, shell, function (err, stdout, stderr) {
     var res = JSON.parse(stdout)
     if (err) {
       res.actualCode = err.code

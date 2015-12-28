@@ -1,5 +1,6 @@
 var exec = require('child_process').exec,
-  t = require('tap')
+  t = require('tap'),
+  shell = process.platform === 'win32' ? null : { shell: '/bin/bash' }
 
 var fixture = require.resolve('./fixtures/change-code.js')
 var expect = require('./fixtures/change-code-expect.json')
@@ -41,7 +42,7 @@ types.forEach(function (type) {
 opts.forEach(function (opt) {
   t.test(opt, function (t) {
     var cmd = process.execPath + ' ' + fixture + ' ' + opt
-    exec(cmd, function (err, stdout, stderr) {
+    exec(cmd, shell, function (err, stdout, stderr) {
       var res = JSON.parse(stdout)
       if (err) {
         res.actualCode = err.code

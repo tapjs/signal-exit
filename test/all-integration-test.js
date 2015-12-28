@@ -1,7 +1,8 @@
 /* global describe, it */
 
 var exec = require('child_process').exec,
-  assert = require('assert')
+  assert = require('assert'),
+  shell = process.platform === 'win32' ? null : { shell: '/bin/bash' }
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -32,7 +33,8 @@ describe('all-signals-integration-test', function () {
       // travis has issues with SIGUSR1 on Node 0.x.10.
       if (process.env.TRAVIS && sig === 'SIGUSR1') return done()
 
-      exec(node + ' ' + js + ' ' + sig, function (err, stdout, stderr) {
+      var cmd = node + ' ' + js + ' ' + sig
+      exec(cmd, shell, function (err, stdout, stderr) {
         if (sig) {
           assert(err)
           if (!isNaN(sig)) {
@@ -71,7 +73,7 @@ describe('all-signals-integration-test', function () {
       if (process.env.TRAVIS && sig === 'SIGUSR1') return done()
 
       var cmd = node + ' ' + js + ' ' + sig
-      exec(cmd, function (err, stdout, stderr) {
+      exec(cmd, shell, function (err, stdout, stderr) {
         assert.ifError(err)
         try {
           var data = JSON.parse(stdout)
