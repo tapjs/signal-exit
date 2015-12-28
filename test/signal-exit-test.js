@@ -82,13 +82,9 @@ describe('signal-exit', function () {
   // TODO: test on a few non-OSX machines.
   it('removes handlers when fully unwrapped', function (done) {
     exec(process.execPath + ' ./test/fixtures/unwrap.js', shell, function (err, stdout, stderr) {
-      // on Travis CI no err.signal is populated but
-      // err.code is 129 (which I think tends to be SIGHUP).
-      var expectedCode = process.env.TRAVIS ? 129 : null
-
       assert(err)
-      if (!process.env.TRAVIS) err.signal.should.equal('SIGHUP')
-      expect(err.code).to.equal(expectedCode)
+      err.signal.should.equal('SIGHUP')
+      expect(err.code).to.equal(null)
       done()
     })
   })
