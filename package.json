@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bcoe/signal-exit.git"
+    "url": "https://github.com/tapjs/signal-exit.git"
   },
   "keywords": [
     "signal",
@@ -19,9 +19,9 @@
   "author": "Ben Coe <ben@npmjs.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bcoe/signal-exit/issues"
+    "url": "https://github.com/tapjs/signal-exit/issues"
   },
-  "homepage": "https://github.com/bcoe/signal-exit",
+  "homepage": "https://github.com/tapjs/signal-exit",
   "devDependencies": {
     "chai": "^2.3.0",
     "coveralls": "^2.11.2",
