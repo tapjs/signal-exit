@@ -102,4 +102,13 @@ describe('signal-exit', function () {
       done()
     })
   })
+
+  it('does not exit on sigpipe', function (done) {
+    exec(process.execPath + ' ./test/fixtures/sigpipe.js', shell, function (err, stdout, stderr) {
+      assert.ifError(err)
+      stdout.should.match(/hello/)
+      stderr.should.match(/onSignalExit\(0,null\)/)
+      done()
+    })
+  })
 })

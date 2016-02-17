@@ -23,7 +23,6 @@ module.exports = [
   'SIGILL',
   'SIGINT',
   'SIGIOT',
-  'SIGPIPE',
   'SIGPROF',
   'SIGQUIT',
   'SIGSEGV',
