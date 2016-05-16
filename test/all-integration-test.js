@@ -27,7 +27,9 @@ describe('all-signals-integration-test', function () {
   }
 
   // Exhaustively test every signal, and a few numbers.
-  var signals = onSignalExit.signals()
+  // signal-exit does not currently support process.kill()
+  // on win32.
+  var signals = isWindows ? [] : onSignalExit.signals()
   signals.concat('', 0, 1, 2, 3, 54).forEach(function (sig) {
     var js = require.resolve('./fixtures/exiter.js')
     it('exits properly: ' + sig, function (done) {
@@ -41,9 +43,9 @@ describe('all-signals-integration-test', function () {
           if (!isNaN(sig)) {
             if (!isWindows) assert.equal(err.code, sig)
           } else if (!weirdSignal(sig)) {
-            err.signal.should.equal(sig)
+            if (!isWindows) err.signal.should.equal(sig)
           } else if (sig) {
-            assert(err.signal)
+            if (!isWindows) assert(err.signal)
           }
         } else {
           assert.ifError(err)
@@ -65,10 +67,6 @@ describe('all-signals-integration-test', function () {
       })
     })
   })
-
-  // TODO: figure out why external signal integration tests
-  // fail for windows.
-  if (isWindows) return
 
   signals.forEach(function (sig) {
     var js = require.resolve('./fixtures/parent.js')
