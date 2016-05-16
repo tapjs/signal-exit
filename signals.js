@@ -25,7 +25,7 @@ module.exports = [
   'SIGTERM'
 ]
 
-if (process.platform === 'win32') {
+if (process.platform !== 'win32') {
   module.exports.push(
     'SIGVTALRM',
     'SIGXCPU',
