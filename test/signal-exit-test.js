@@ -5,7 +5,7 @@ var expect = require('chai').expect
 var assert = require('assert')
 var isWindows = process.platform === 'win32'
 var shell = isWindows ? null : { shell: '/bin/bash' }
-var node = '"' + process.execPath + '"'
+var node = isWindows ? '"' + process.execPath + '"' : process.execPath
 
 require('chai').should()
 require('tap').mochaGlobals()

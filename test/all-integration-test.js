@@ -4,6 +4,7 @@ var exec = require('child_process').exec
 var assert = require('assert')
 var isWindows = process.platform === 'win32'
 var shell = isWindows ? null : { shell: '/bin/bash' }
+var node = isWindows ? '"' + process.execPath + '"' : process.execPath
 
 require('chai').should()
 require('tap').mochaGlobals()
@@ -28,7 +29,6 @@ describe('all-signals-integration-test', function () {
   // Exhaustively test every signal, and a few numbers.
   var signals = onSignalExit.signals()
   signals.concat('', 0, 1, 2, 3, 54).forEach(function (sig) {
-    var node = '"' + process.execPath + '"'
     var js = require.resolve('./fixtures/exiter.js')
     it('exits properly: ' + sig, function (done) {
       // issues with SIGUSR1 on Node 0.10.x
@@ -71,7 +71,6 @@ describe('all-signals-integration-test', function () {
   if (isWindows) return
 
   signals.forEach(function (sig) {
-    var node = process.execPath
     var js = require.resolve('./fixtures/parent.js')
     it('exits properly: (external sig) ' + sig, function (done) {
       // issues with SIGUSR1 on Node 0.10.x
