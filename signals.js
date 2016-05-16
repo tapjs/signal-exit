@@ -13,7 +13,6 @@
 // fatal signal like SIGWINCH or something, and then
 // exit, it'll end up firing `process.emit('exit')`, so
 // the handler will be fired anyway.
-
 module.exports = [
   'SIGABRT',
   'SIGALRM',
@@ -22,18 +21,23 @@ module.exports = [
   'SIGHUP',
   'SIGILL',
   'SIGINT',
-  'SIGIOT',
-  'SIGPROF',
-  'SIGQUIT',
   'SIGSEGV',
-  'SIGSYS',
-  'SIGTERM',
-  'SIGTRAP',
-  'SIGUSR2',
-  'SIGVTALRM',
-  'SIGXCPU',
-  'SIGXFSZ'
+  'SIGTERM'
 ]
+
+if (process.platform !== 'win32') {
+  module.exports.push(
+    'SIGVTALRM',
+    'SIGXCPU',
+    'SIGXFSZ',
+    'SIGUSR2',
+    'SIGTRAP',
+    'SIGSYS',
+    'SIGQUIT',
+    'SIGIOT',
+    'SIGPROF'
+  )
+}
 
 if (process.platform === 'linux') {
   module.exports.push(
