@@ -8,6 +8,10 @@
     "test": "tap --timeout=240 ./test/*.js --cov",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
+  "files": [
+    "index.js",
+    "signals.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tapjs/signal-exit.git"
