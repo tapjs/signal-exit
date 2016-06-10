@@ -25,7 +25,7 @@ if (process.argv[2]) {
     'SIGLOST',
     'SIGPIPE',
     'SIGPOLL',
-    'SIGPROF',
+    // 'SIGPROF', see #21
     'SIGPWR',
     'SIGQUIT',
     'SIGSEGV',
