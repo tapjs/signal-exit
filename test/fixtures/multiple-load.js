@@ -15,7 +15,7 @@ onSignalExit(function (code, signal) {
 })
 
 delete require('module')._cache[require.resolve('../../')]
-var onSignalExit = require('../../')
+onSignalExit = require('../../')
 
 onSignalExit(function (code, signal) {
   counter++
@@ -31,7 +31,7 @@ onSignalExit(function (code, signal) {
 
 // Lastly, some that should NOT be shown
 delete require('module')._cache[require.resolve('../../')]
-var onSignalExit = require('../../')
+onSignalExit = require('../../')
 
 var unwrap = onSignalExit(function (code, signal) {
   counter++

@@ -33,7 +33,6 @@ if (isNaN(exit)) {
   } catch (er) {
     wanted = [ 0, null ]
   }
-
 } else {
   exit = +exit
   wanted = [ exit, null ]

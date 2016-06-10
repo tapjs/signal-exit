@@ -23,7 +23,7 @@ var codes = [ 0, 2, 'null' ]
 
 // do not change, change to 5 with exit(), change to 5 with exitCode,
 // change to 5 and then to 2 with exit(), change twice with exitcode
-var changes = [ 'nochange', 'change', 'twice']
+var changes = [ 'nochange', 'change', 'twice' ]
 if (!isZero10()) changes.push('code', 'twicecode')
 
 // use signal-exit, use process.on('exit')

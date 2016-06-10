@@ -12,7 +12,6 @@ require('tap').mochaGlobals()
 var onSignalExit = require('../')
 
 describe('all-signals-integration-test', function () {
-
   // These are signals that are aliases for other signals, so
   // the result will sometimes be one of the others.  For these,
   // we just verify that we GOT a signal, not what it is.
