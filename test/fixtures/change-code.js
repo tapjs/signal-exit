@@ -1,7 +1,9 @@
+var join = require('path').join
+
 if (process.argv.length === 2) {
   var types = [ 'explicit', 'code', 'normal' ]
   var codes = [ 0, 2, 'null' ]
-  var changes = [ 'nochange', 'change', 'code', 'twice', 'twicecode']
+  var changes = [ 'nochange', 'change', 'code', 'twice', 'twicecode' ]
   var handlers = [ 'sigexit', 'nosigexit' ]
   var opts = []
   types.forEach(function (type) {
@@ -77,7 +79,7 @@ function listener (code, signal) {
 function run (opt) {
   console.error(opt)
   var shell = process.platform === 'win32' ? null : { shell: '/bin/bash' }
-  exec(process.execPath + ' ' + __filename + ' ' + opt, shell, function (err, stdout, stderr) {
+  exec(join(process.execPath, ' ', __filename, ' ' + opt), shell, function (err, stdout, stderr) {
     var res = JSON.parse(stdout)
     if (err) {
       res.actualCode = err.code

@@ -34,8 +34,10 @@ if (process.platform !== 'win32') {
     'SIGTRAP',
     'SIGSYS',
     'SIGQUIT',
-    'SIGIOT',
-    'SIGPROF'
+    'SIGIOT'
+    // should detect profiler and enable/disable accordingly.
+    // see #21
+    // 'SIGPROF'
   )
 }
 

@@ -11,7 +11,6 @@ require('chai').should()
 require('tap').mochaGlobals()
 
 describe('signal-exit', function () {
-
   it('receives an exit event when a process exits normally', function (done) {
     exec(node + ' ./test/fixtures/end-of-execution.js', shell, function (err, stdout, stderr) {
       expect(err).to.equal(null)
