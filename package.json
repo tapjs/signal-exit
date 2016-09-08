@@ -30,7 +30,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.10",
-    "nyc": "^7.0.0",
+    "nyc": "^8.0.0",
     "standard": "^7.1.2",
     "standard-version": "^2.3.0",
     "tap": "^6.2.0"
