@@ -3,6 +3,7 @@
   "version": "3.0.2",
   "description": "when you want to fire an event no matter how a process exits.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "pretest": "standard",
     "test": "tap --timeout=240 ./test/*.js --cov",
@@ -11,6 +12,7 @@
   },
   "files": [
     "index.js",
+    "index.d.ts",
     "signals.js"
   ],
   "repository": {
