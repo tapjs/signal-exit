@@ -40,7 +40,7 @@ describe('all-signals-integration-test', function () {
         if (sig) {
           if (!isWindows) assert(err)
           if (!isNaN(sig)) {
-            if (!isWindows) assert.equal(err.code, sig)
+            if (!isWindows) assert.strictEqual(err.code, sig)
           } else if (!weirdSignal(sig)) {
             if (!isWindows) err.signal.should.equal(sig)
           } else if (sig) {
@@ -61,7 +61,7 @@ describe('all-signals-integration-test', function () {
           data.wanted[1] = true
           data.found[1] = !!data.found[1]
         }
-        assert.deepEqual(data.found, data.wanted)
+        assert.deepStrictEqual(data.found, data.wanted)
         done()
       })
     })
@@ -88,8 +88,8 @@ describe('all-signals-integration-test', function () {
           data.found[1] = !!data.found[1]
           data.external[1] = !!data.external[1]
         }
-        assert.deepEqual(data.found, data.wanted)
-        assert.deepEqual(data.external, data.wanted)
+        assert.deepStrictEqual(data.found, data.wanted)
+        assert.deepStrictEqual(data.external, data.wanted)
         done()
       })
     })

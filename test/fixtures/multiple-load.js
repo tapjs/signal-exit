@@ -5,13 +5,13 @@ var counter = 0
 onSignalExit(function (code, signal) {
   counter++
   console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+    counter, code, signal)
+}, { alwaysLast: true })
 
 onSignalExit(function (code, signal) {
   counter++
   console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+    counter, code, signal)
 })
 
 delete require('module')._cache[require.resolve('../../')]
@@ -20,13 +20,13 @@ onSignalExit = require('../../')
 onSignalExit(function (code, signal) {
   counter++
   console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+    counter, code, signal)
+}, { alwaysLast: true })
 
 onSignalExit(function (code, signal) {
   counter++
   console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+    counter, code, signal)
 })
 
 // Lastly, some that should NOT be shown
@@ -36,14 +36,14 @@ onSignalExit = require('../../')
 var unwrap = onSignalExit(function (code, signal) {
   counter++
   console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+    counter, code, signal)
+}, { alwaysLast: true })
 unwrap()
 
 unwrap = onSignalExit(function (code, signal) {
   counter++
   console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+    counter, code, signal)
 })
 
 unwrap()

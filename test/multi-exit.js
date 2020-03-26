@@ -14,20 +14,20 @@ function isZero10 () {
 }
 
 // process.exit(code), process.exitCode = code, normal exit
-var types = [ 'explicit', 'normal' ]
+var types = ['explicit', 'normal']
 if (!isZero10()) types.push('code')
 
 // initial code that is set.  Note, for 'normal' exit, there's no
 // point doing these, because we just exit without modifying code
-var codes = [ 0, 2, 'null' ]
+var codes = [0, 2, 'null']
 
 // do not change, change to 5 with exit(), change to 5 with exitCode,
 // change to 5 and then to 2 with exit(), change twice with exitcode
-var changes = [ 'nochange', 'change', 'twice' ]
+var changes = ['nochange', 'change', 'twice']
 if (!isZero10()) changes.push('code', 'twicecode')
 
 // use signal-exit, use process.on('exit')
-var handlers = [ 'sigexit', 'nosigexit' ]
+var handlers = ['sigexit', 'nosigexit']
 
 var opts = []
 types.forEach(function (type) {

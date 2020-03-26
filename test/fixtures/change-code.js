@@ -1,13 +1,13 @@
 var join = require('path').join
 
 if (process.argv.length === 2) {
-  var types = [ 'explicit', 'code', 'normal' ]
-  var codes = [ 0, 2, 'null' ]
-  var changes = [ 'nochange', 'change', 'code', 'twice', 'twicecode' ]
-  var handlers = [ 'sigexit', 'nosigexit' ]
+  var types = ['explicit', 'code', 'normal']
+  var codes = [0, 2, 'null']
+  var changes = ['nochange', 'change', 'code', 'twice', 'twicecode']
+  var handlers = ['sigexit', 'nosigexit']
   var opts = []
   types.forEach(function (type) {
-    var testCodes = type === 'normal' ? [ 0 ] : codes
+    var testCodes = type === 'normal' ? [0] : codes
     testCodes.forEach(function (code) {
       changes.forEach(function (change) {
         handlers.forEach(function (handler) {

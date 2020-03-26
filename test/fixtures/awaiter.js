@@ -13,7 +13,7 @@ onSignalExit(function (code, signal) {
     signal = !!signal
   }
   console.log('%j', {
-    found: [ code, signal ],
+    found: [code, signal],
     wanted: wanted
   })
 })
@@ -23,10 +23,10 @@ switch (expectSignal) {
   case 'SIGIOT':
   case 'SIGUNUSED':
   case 'SIGPOLL':
-    wanted = [ null, true ]
+    wanted = [null, true]
     break
   default:
-    wanted = [ null, expectSignal ]
+    wanted = [null, expectSignal]
     break
 }
 

@@ -5,7 +5,7 @@ setTimeout(function () {})
 var calledListener = 0
 onSignalExit(function (code, signal) {
   console.log('exited calledListener=%j, code=%j, signal=%j',
-              calledListener, code, signal)
+    calledListener, code, signal)
 })
 
 process.on('SIGHUP', listener)

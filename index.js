@@ -30,7 +30,7 @@ if (!emitter.infinite) {
 }
 
 module.exports = function (cb, opts) {
-  assert.equal(typeof cb, 'function', 'a callback must be provided for exit handler')
+  assert.strictEqual(typeof cb, 'function', 'a callback must be provided for exit handler')
 
   if (loaded === false) {
     load()

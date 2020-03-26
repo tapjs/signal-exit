@@ -108,7 +108,7 @@ describe('signal-exit', function () {
     it('does not exit if user handles signal', function (done) {
       exec(node + ' ./test/fixtures/signal-listener.js', shell, function (err, stdout, stderr) {
         assert(err)
-        assert.equal(stdout, 'exited calledListener=4, code=null, signal="SIGHUP"\n')
+        assert.strictEqual(stdout, 'exited calledListener=4, code=null, signal="SIGHUP"\n')
         done()
       })
     })

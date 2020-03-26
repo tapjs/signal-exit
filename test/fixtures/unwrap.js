@@ -16,14 +16,14 @@ var counter = 0
 var unwrap = onSignalExit(function (code, signal) {
   counter++
   console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+    counter, code, signal)
+}, { alwaysLast: true })
 unwrap()
 
 unwrap = onSignalExit(function (code, signal) {
   counter++
   console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+    counter, code, signal)
 })
 unwrap()
 
