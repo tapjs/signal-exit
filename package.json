@@ -29,10 +29,10 @@
   "homepage": "https://github.com/tapjs/signal-exit",
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.11.10",
-    "nyc": "^8.1.0",
+    "coveralls": "^3.1.1",
+    "nyc": "^15.1.0",
     "standard": "^8.1.0",
-    "standard-version": "^2.3.0",
-    "tap": "^8.0.1"
+    "standard-version": "^9.3.1",
+    "tap": "^15.0.9"
   }
 }
