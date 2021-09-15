@@ -4,7 +4,6 @@
   "description": "when you want to fire an event no matter how a process exits.",
   "main": "index.js",
   "scripts": {
-    "pretest": "standard",
     "test": "tap --timeout=240 ./test/*.js --cov",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "release": "standard-version"
@@ -31,7 +30,6 @@
     "chai": "^3.5.0",
     "coveralls": "^3.1.1",
     "nyc": "^15.1.0",
-    "standard": "^8.1.0",
     "standard-version": "^9.3.1",
     "tap": "^15.0.9"
   }
