@@ -5,7 +5,7 @@
 var process = global.process
 // some kind of non-node environment, just no-op
 if (typeof process !== 'object' || !process) {
-  module.exports = () => {}
+  module.exports = function () {}
 } else {
   var assert = require('assert')
   var signals = require('./signals.js')
