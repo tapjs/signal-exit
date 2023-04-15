@@ -1,13 +1,13 @@
 var join = require('path').join
 
 if (process.argv.length === 2) {
-  var types = [ 'explicit', 'code', 'normal' ]
-  var codes = [ 0, 2, 'null' ]
-  var changes = [ 'nochange', 'change', 'code', 'twice', 'twicecode' ]
-  var handlers = [ 'sigexit', 'nosigexit' ]
+  var types = ['explicit', 'code', 'normal']
+  var codes = [0, 2, 'null']
+  var changes = ['nochange', 'change', 'code', 'twice', 'twicecode']
+  var handlers = ['sigexit', 'nosigexit']
   var opts = []
   types.forEach(function (type) {
-    var testCodes = type === 'normal' ? [ 0 ] : codes
+    var testCodes = type === 'normal' ? [0] : codes
     testCodes.forEach(function (code) {
       changes.forEach(function (change) {
         handlers.forEach(function (handler) {
@@ -28,8 +28,8 @@ if (process.argv.length === 2) {
   var sigexit = process.argv[5] !== 'nosigexit'
 
   if (sigexit) {
-    var onSignalExit = require('../../')
-    onSignalExit(listener)
+    var { onExit } = require('../../')
+    onExit(listener)
   } else {
     process.on('exit', listener)
   }
@@ -71,29 +71,37 @@ if (process.argv.length === 2) {
   }
 }
 
-function listener (code, signal) {
+function listener(code, signal) {
   signal = signal || null
-  console.log('%j', { code: code, signal: signal, exitCode: process.exitCode || 0 })
+  console.log('%j', {
+    code: code,
+    signal: signal,
+    exitCode: process.exitCode || 0,
+  })
 }
 
-function run (opt) {
+function run(opt) {
   console.error(opt)
   var shell = process.platform === 'win32' ? null : { shell: '/bin/bash' }
-  exec(join(process.execPath, ' ', __filename, ' ' + opt), shell, function (err, stdout, stderr) {
-    var res = JSON.parse(stdout)
-    if (err) {
-      res.actualCode = err.code
-      res.actualSignal = err.signal
-    } else {
-      res.actualCode = 0
-      res.actualSignal = null
+  exec(
+    join(process.execPath, ' ', __filename, ' ' + opt),
+    shell,
+    function (err, stdout, stderr) {
+      var res = JSON.parse(stdout)
+      if (err) {
+        res.actualCode = err.code
+        res.actualSignal = err.signal
+      } else {
+        res.actualCode = 0
+        res.actualSignal = null
+      }
+      res.stderr = stderr.trim().split('\n')
+      results[opt] = res
+      if (opts.length) {
+        run(opts.shift())
+      } else {
+        console.log(JSON.stringify(results, null, 2))
+      }
     }
-    res.stderr = stderr.trim().split('\n')
-    results[opt] = res
-    if (opts.length) {
-      run(opts.shift())
-    } else {
-      console.log(JSON.stringify(results, null, 2))
-    }
-  })
+  )
 }

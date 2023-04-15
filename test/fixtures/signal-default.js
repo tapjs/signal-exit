@@ -44,15 +44,17 @@ if (process.argv[2]) {
     'SIGVTALRM',
     'SIGWINCH',
     'SIGXCPU',
-    'SIGXFSZ'
+    'SIGXFSZ',
   ]
 
   var spawn = require('child_process').spawn
-  ;(function test (signal) {
+  ;(function test(signal) {
     if (!signal) {
       return
     }
-    var child = spawn(process.execPath, [__filename, signal], { stdio: 'inherit' })
+    var child = spawn(process.execPath, [__filename, signal], {
+      stdio: 'inherit',
+    })
     var timer = setTimeout(function () {
       console.log('requires SIGCONT')
       process.kill(child.pid, 'SIGCONT')
@@ -66,7 +68,7 @@ if (process.argv[2]) {
   })(signals.pop())
 }
 
-function child (signal) {
+function child(signal) {
   console.log('signal=%s', signal)
 
   // set a timeout so we know whether or not the process terminated.
@@ -79,7 +81,7 @@ function child (signal) {
   })
 
   try {
-    process.on(signal, function fn () {
+    process.on(signal, function fn() {
       console.log('signal is catchable', signal)
       process.removeListener(signal, fn)
       setTimeout(function () {

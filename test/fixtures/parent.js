@@ -14,7 +14,7 @@ if (gens > 0) {
 }
 
 var child = spawn(process.execPath, [file, signal, gens - 1], {
-  stdio: [ 0, 'pipe', 'pipe' ]
+  stdio: [0, 'pipe', 'pipe'],
 })
 
 if (!gens) {
@@ -38,14 +38,14 @@ child.on('close', function (code, sig) {
       pid: process.pid,
       child: child.pid,
       gens: gens,
-      expect: [ null, signal ],
-      actual: [ code, sig ]
+      expect: [null, signal],
+      actual: [code, sig],
     })
     return
   }
   if (result.wanted[1] === true) {
     sig = !!sig
   }
-  result.external = result.external || [ code, sig ]
+  result.external = result.external || [code, sig]
   console.log('%j', result)
 })

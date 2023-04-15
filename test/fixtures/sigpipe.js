@@ -1,6 +1,6 @@
-var onSignalExit = require('../..')
-onSignalExit(function (code, signal) {
-  console.error('onSignalExit(%j,%j)', code, signal)
+const { onExit } = require('../..')
+onExit(function (code, signal) {
+  console.error('onExit(%j,%j)', code, signal)
 })
 setTimeout(function () {
   console.log('hello')

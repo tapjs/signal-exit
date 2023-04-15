@@ -4,17 +4,17 @@ if (!expectSignal || !isNaN(expectSignal)) {
   throw new Error('signal not provided')
 }
 
-var onSignalExit = require('../../')
+var { onExit } = require('../../')
 
-onSignalExit(function (code, signal) {
+onExit(function (code, signal) {
   // some signals don't always get recognized properly, because
   // they have the same numeric code.
   if (wanted[1] === true) {
     signal = !!signal
   }
   console.log('%j', {
-    found: [ code, signal ],
-    wanted: wanted
+    found: [code, signal],
+    wanted: wanted,
   })
 })
 
@@ -23,10 +23,10 @@ switch (expectSignal) {
   case 'SIGIOT':
   case 'SIGUNUSED':
   case 'SIGPOLL':
-    wanted = [ null, true ]
+    wanted = [null, true]
     break
   default:
-    wanted = [ null, expectSignal ]
+    wanted = [null, expectSignal]
     break
 }
 

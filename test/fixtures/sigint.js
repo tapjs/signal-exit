@@ -1,6 +1,6 @@
-var onSignalExit = require('../../')
+const { onExit } = require('../../')
 
-onSignalExit(function (code, signal) {
+onExit(function (code, signal) {
   console.log('exited with sigint, ' + code + ', ' + signal)
 })
 

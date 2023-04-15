@@ -5,10 +5,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "explicit 0 nochange nosigexit": {
     "code": 0,
@@ -16,10 +13,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "explicit 0 change sigexit": {
     "code": 5,
@@ -27,10 +21,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit 0 change nosigexit": {
     "code": 0,
@@ -38,10 +29,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit 0 code sigexit": {
     "code": 5,
@@ -49,11 +37,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "explicit 0 code nosigexit": {
     "code": 0,
@@ -61,11 +45,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "explicit 0 twice sigexit": {
     "code": 5,
@@ -73,10 +53,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit 0 twice nosigexit": {
     "code": 0,
@@ -84,10 +61,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit 0 twicecode sigexit": {
     "code": 6,
@@ -119,10 +93,7 @@
     "exitCode": 2,
     "actualCode": 2,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "second code=2"]
   },
   "explicit 2 nochange nosigexit": {
     "code": 2,
@@ -130,10 +101,7 @@
     "exitCode": 2,
     "actualCode": 2,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "second code=2"]
   },
   "explicit 2 change sigexit": {
     "code": 5,
@@ -141,10 +109,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "explicit 2 change nosigexit": {
     "code": 2,
@@ -152,10 +117,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "explicit 2 code sigexit": {
     "code": 5,
@@ -163,11 +125,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5", "second code=2"]
   },
   "explicit 2 code nosigexit": {
     "code": 2,
@@ -175,11 +133,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5", "second code=2"]
   },
   "explicit 2 twice sigexit": {
     "code": 5,
@@ -187,10 +141,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "explicit 2 twice nosigexit": {
     "code": 2,
@@ -198,10 +149,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "explicit 2 twicecode sigexit": {
     "code": 6,
@@ -233,10 +181,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "explicit null nochange nosigexit": {
     "code": 0,
@@ -244,10 +189,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "explicit null change sigexit": {
     "code": 5,
@@ -255,10 +197,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit null change nosigexit": {
     "code": 0,
@@ -266,10 +205,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit null code sigexit": {
     "code": 5,
@@ -277,11 +213,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "explicit null code nosigexit": {
     "code": 0,
@@ -289,11 +221,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "explicit null twice sigexit": {
     "code": 5,
@@ -301,10 +229,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit null twice nosigexit": {
     "code": 0,
@@ -312,10 +237,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "explicit null twicecode sigexit": {
     "code": 6,
@@ -347,10 +269,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "code 0 nochange nosigexit": {
     "code": 0,
@@ -358,10 +277,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "code 0 change sigexit": {
     "code": 5,
@@ -369,10 +285,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code 0 change nosigexit": {
     "code": 0,
@@ -380,10 +293,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code 0 code sigexit": {
     "code": 5,
@@ -391,11 +301,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "code 0 code nosigexit": {
     "code": 0,
@@ -403,11 +309,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "code 0 twice sigexit": {
     "code": 5,
@@ -415,10 +317,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code 0 twice nosigexit": {
     "code": 0,
@@ -426,10 +325,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code 0 twicecode sigexit": {
     "code": 6,
@@ -461,10 +357,7 @@
     "exitCode": 2,
     "actualCode": 2,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "second code=2"]
   },
   "code 2 nochange nosigexit": {
     "code": 2,
@@ -472,10 +365,7 @@
     "exitCode": 2,
     "actualCode": 2,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "second code=2"]
   },
   "code 2 change sigexit": {
     "code": 5,
@@ -483,10 +373,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "code 2 change nosigexit": {
     "code": 2,
@@ -494,10 +381,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "code 2 code sigexit": {
     "code": 5,
@@ -505,11 +389,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5", "second code=2"]
   },
   "code 2 code nosigexit": {
     "code": 2,
@@ -517,11 +397,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5",
-      "second code=2"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5", "second code=2"]
   },
   "code 2 twice sigexit": {
     "code": 5,
@@ -529,10 +405,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "code 2 twice nosigexit": {
     "code": 2,
@@ -540,10 +413,7 @@
     "exitCode": 2,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=2",
-      "set code from 2 to 5"
-    ]
+    "stderr": ["first code=2", "set code from 2 to 5"]
   },
   "code 2 twicecode sigexit": {
     "code": 6,
@@ -575,10 +445,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "code null nochange nosigexit": {
     "code": 0,
@@ -586,10 +453,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "code null change sigexit": {
     "code": 5,
@@ -597,10 +461,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code null change nosigexit": {
     "code": 0,
@@ -608,10 +469,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code null code sigexit": {
     "code": 5,
@@ -619,11 +477,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "code null code nosigexit": {
     "code": 0,
@@ -631,11 +485,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "code null twice sigexit": {
     "code": 5,
@@ -643,10 +493,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code null twice nosigexit": {
     "code": 0,
@@ -654,10 +501,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "code null twicecode sigexit": {
     "code": 6,
@@ -689,10 +533,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "normal 0 nochange nosigexit": {
     "code": 0,
@@ -700,10 +541,7 @@
     "exitCode": 0,
     "actualCode": 0,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "second code=0"]
   },
   "normal 0 change sigexit": {
     "code": 5,
@@ -711,10 +549,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "normal 0 change nosigexit": {
     "code": 0,
@@ -722,10 +557,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "normal 0 code sigexit": {
     "code": 5,
@@ -733,11 +565,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "normal 0 code nosigexit": {
     "code": 0,
@@ -745,11 +573,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5",
-      "second code=0"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5", "second code=0"]
   },
   "normal 0 twice sigexit": {
     "code": 5,
@@ -757,10 +581,7 @@
     "exitCode": 5,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "normal 0 twice nosigexit": {
     "code": 0,
@@ -768,10 +589,7 @@
     "exitCode": 0,
     "actualCode": 5,
     "actualSignal": null,
-    "stderr": [
-      "first code=0",
-      "set code from 0 to 5"
-    ]
+    "stderr": ["first code=0", "set code from 0 to 5"]
   },
   "normal 0 twicecode sigexit": {
     "code": 6,

@@ -10,10 +10,10 @@ Object.defineProperty(process, 'platform', {
   value: 'linux',
   writable: false,
   enumerable: true,
-  configurable: true
+  configurable: true,
 })
 
-var signals = require('../../signals.js')
+const { signals } = require('../../dist/cjs/signals.js')
 signals.push('SIGKILL')
-var onSignalExit = require('../../')
-onSignalExit.load()
+const { load } = require('../../')
+load()

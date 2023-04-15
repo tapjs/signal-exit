@@ -1,52 +1,86 @@
 // simulate cases where the module could be loaded from multiple places
-var onSignalExit = require('../../')
+let onExit = require('../../').onExit
+const newOnExit = () => (onExit = require('../../').onExit)
 var counter = 0
 
-onSignalExit(function (code, signal) {
-  counter++
-  console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+onExit(
+  function (code, signal) {
+    counter++
+    console.log(
+      'last counter=%j, code=%j, signal=%j',
+      counter,
+      code,
+      signal
+    )
+  },
+  { alwaysLast: true }
+)
 
-onSignalExit(function (code, signal) {
+onExit(function (code, signal) {
   counter++
-  console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+  console.log(
+    'first counter=%j, code=%j, signal=%j',
+    counter,
+    code,
+    signal
+  )
 })
 
 delete require('module')._cache[require.resolve('../../')]
-onSignalExit = require('../../')
+newOnExit()
 
-onSignalExit(function (code, signal) {
-  counter++
-  console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+onExit(
+  function (code, signal) {
+    counter++
+    console.log(
+      'last counter=%j, code=%j, signal=%j',
+      counter,
+      code,
+      signal
+    )
+  },
+  { alwaysLast: true }
+)
 
-onSignalExit(function (code, signal) {
+onExit(function (code, signal) {
   counter++
-  console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+  console.log(
+    'first counter=%j, code=%j, signal=%j',
+    counter,
+    code,
+    signal
+  )
 })
 
 // Lastly, some that should NOT be shown
 delete require('module')._cache[require.resolve('../../')]
-onSignalExit = require('../../')
+newOnExit()
 
-var unwrap = onSignalExit(function (code, signal) {
-  counter++
-  console.log('last counter=%j, code=%j, signal=%j',
-              counter, code, signal)
-}, {alwaysLast: true})
+let unwrap = onExit(
+  function (code, signal) {
+    counter++
+    console.log(
+      'last counter=%j, code=%j, signal=%j',
+      counter,
+      code,
+      signal
+    )
+  },
+  { alwaysLast: true }
+)
 unwrap()
 
-unwrap = onSignalExit(function (code, signal) {
+unwrap = onExit(function (code, signal) {
   counter++
-  console.log('first counter=%j, code=%j, signal=%j',
-              counter, code, signal)
+  console.log(
+    'first counter=%j, code=%j, signal=%j',
+    counter,
+    code,
+    signal
+  )
 })
 
 unwrap()
 
-process.kill(process.pid, 'SIGHUP')
+process.kill(process.pid, 'SIGTERM')
 setTimeout(function () {}, 1000)

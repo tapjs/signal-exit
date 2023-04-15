@@ -6,52 +6,55 @@
  */
 'use strict'
 exports[`test/signals.js TAP darwin > must match snapshot 1`] = `
-Array [
-  "SIGABRT",
-  "SIGALRM",
-  "SIGHUP",
-  "SIGINT",
-  "SIGTERM",
-  "SIGVTALRM",
-  "SIGXCPU",
-  "SIGXFSZ",
-  "SIGUSR2",
-  "SIGTRAP",
-  "SIGSYS",
-  "SIGQUIT",
-  "SIGIOT",
-]
+Object {
+  "signals": Array [
+    "SIGHUP",
+    "SIGINT",
+    "SIGTERM",
+    "SIGALRM",
+    "SIGABRT",
+    "SIGVTALRM",
+    "SIGXCPU",
+    "SIGXFSZ",
+    "SIGUSR2",
+    "SIGTRAP",
+    "SIGSYS",
+    "SIGQUIT",
+    "SIGIOT",
+  ],
+}
 `
 
 exports[`test/signals.js TAP linux > must match snapshot 1`] = `
-Array [
-  "SIGABRT",
-  "SIGALRM",
-  "SIGHUP",
-  "SIGINT",
-  "SIGTERM",
-  "SIGVTALRM",
-  "SIGXCPU",
-  "SIGXFSZ",
-  "SIGUSR2",
-  "SIGTRAP",
-  "SIGSYS",
-  "SIGQUIT",
-  "SIGIOT",
-  "SIGIO",
-  "SIGPOLL",
-  "SIGPWR",
-  "SIGSTKFLT",
-  "SIGUNUSED",
-]
+Object {
+  "signals": Array [
+    "SIGHUP",
+    "SIGINT",
+    "SIGTERM",
+    "SIGALRM",
+    "SIGABRT",
+    "SIGVTALRM",
+    "SIGXCPU",
+    "SIGXFSZ",
+    "SIGUSR2",
+    "SIGTRAP",
+    "SIGSYS",
+    "SIGQUIT",
+    "SIGIOT",
+    "SIGIO",
+    "SIGPOLL",
+    "SIGPWR",
+    "SIGSTKFLT",
+  ],
+}
 `
 
 exports[`test/signals.js TAP win32 > must match snapshot 1`] = `
-Array [
-  "SIGABRT",
-  "SIGALRM",
-  "SIGHUP",
-  "SIGINT",
-  "SIGTERM",
-]
+Object {
+  "signals": Array [
+    "SIGHUP",
+    "SIGINT",
+    "SIGTERM",
+  ],
+}
 `

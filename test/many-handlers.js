@@ -1,12 +1,12 @@
-var onexit = require('../')
-var spawn = require('child_process').spawn
-var t = require('tap')
-var node = process.execPath
-var f = __filename
+const { onExit } = require('../')
+const spawn = require('child_process').spawn
+const t = require('tap')
+const node = process.execPath
+const f = __filename
 
 if (process.argv[2] === 'child') {
   for (var i = 0; i < 15; i++) {
-    onexit(function () {
+    onExit(function () {
       console.log('ok')
     })
   }

@@ -1,8 +1,8 @@
-var onSignalExit = require('../../')
+const { onExit } = require('../../')
 global.process = null
 
-var unwrap = onSignalExit(function (code, signal) {
-  throw new Error('this should not ever be called')
+var unwrap = onExit((code, signal) => {
+  console.log('onExit(%j,%j)', code, signal)
 })
 
 if (typeof unwrap !== 'function') {

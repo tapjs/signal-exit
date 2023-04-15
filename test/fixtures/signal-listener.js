@@ -1,23 +1,27 @@
-var onSignalExit = require('../../')
+const { onExit } = require('../../')
 
 setTimeout(function () {})
 
 var calledListener = 0
-onSignalExit(function (code, signal) {
-  console.log('exited calledListener=%j, code=%j, signal=%j',
-              calledListener, code, signal)
+onExit(function (code, signal) {
+  console.log(
+    'exited calledListener=%j, code=%j, signal=%j',
+    calledListener,
+    code,
+    signal
+  )
 })
 
-process.on('SIGHUP', listener)
-process.kill(process.pid, 'SIGHUP')
+process.on('SIGTERM', listener)
+process.kill(process.pid, 'SIGTERM')
 
-function listener () {
+function listener() {
   calledListener++
   if (calledListener > 3) {
-    process.removeListener('SIGHUP', listener)
+    process.removeListener('SIGTERM', listener)
   }
 
   setTimeout(function () {
-    process.kill(process.pid, 'SIGHUP')
+    process.kill(process.pid, 'SIGTERM')
   })
 }

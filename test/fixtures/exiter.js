@@ -1,16 +1,16 @@
-var exit = process.argv[2] || 0
+const exit = process.argv[2] || 0
 
-var onSignalExit = require('../../')
+const { onExit } = require('../../')
 
-onSignalExit(function (code, signal) {
+onExit((code, signal) => {
   // some signals don't always get recognized properly, because
   // they have the same numeric code.
   if (wanted[1] === true) {
     signal = !!signal
   }
   console.log('%j', {
-    found: [ code, signal ],
-    wanted: wanted
+    found: [code, signal],
+    wanted: wanted,
   })
 })
 
@@ -20,10 +20,10 @@ if (isNaN(exit)) {
     case 'SIGIOT':
     case 'SIGUNUSED':
     case 'SIGPOLL':
-      wanted = [ null, true ]
+      wanted = [null, true]
       break
     default:
-      wanted = [ null, exit ]
+      wanted = [null, exit]
       break
   }
 
@@ -31,14 +31,13 @@ if (isNaN(exit)) {
     process.kill(process.pid, exit)
     setTimeout(function () {}, 1000)
   } catch (er) {
-    wanted = [ 0, null ]
+    wanted = [0, null]
   }
 } else {
-  exit = +exit
-  wanted = [ exit, null ]
+  wanted = [+exit, null]
   // If it's explicitly requested 0, then explicitly call it.
   // "no arg" = "exit naturally"
   if (exit || process.argv[2]) {
-    process.exit(exit)
+    process.exit(+exit)
   }
 }

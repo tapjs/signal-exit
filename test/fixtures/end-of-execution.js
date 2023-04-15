@@ -1,5 +1,5 @@
-var onSignalExit = require('../../')
+const { onExit } = require('../../')
 
-onSignalExit(function (code, signal) {
+onExit((code, signal) => {
   console.log('reached end of execution, ' + code + ', ' + signal)
 })
