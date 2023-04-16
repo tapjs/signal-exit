@@ -153,7 +153,17 @@ class SignalExit extends SignalExitBase {
         // We know that this will kill the process, so we can
         // safely emit now.
         const listeners = this.#process.listeners(sig)
-        if (listeners.length === this.#emitter.count) {
+        let { count } = this.#emitter
+        // This is a workaround for the fact that signal-exit v3 and signal
+        // exit v4 are not aware of each other, and each will attempt to let
+        // the other handle it, so neither of them do. To correct this, we
+        // detect if we're the only handler *except* for previous versions
+        // of signal-exit.
+        /* c8 ignore start */
+        //@ts-ignore
+        if (typeof process.__signal_exit_emitter__ === 'object') count++
+        /* c8 ignore stop */
+        if (listeners.length === count) {
           this.unload()
           this.#emitter.emit('exit', null, sig)
           this.#emitter.emit('afterExit', null, sig)
