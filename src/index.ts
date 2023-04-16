@@ -157,7 +157,9 @@ class SignalExit extends SignalExitBase {
           this.unload()
           this.#emitter.emit('exit', null, sig)
           this.#emitter.emit('afterExit', null, sig)
+          /* c8 ignore start */
           process.kill(process.pid, sig === 'SIGHUP' ? this.#hupSig : sig)
+          /* c8 ignore stop */
         }
       }
     }
