@@ -54,7 +54,6 @@ class Emitter {
 
   constructor() {
     if (global[kExitEmitter]) {
-      console.error('reusing global emitter')
       return global[kExitEmitter]
     }
     ObjectDefineProperty(global, kExitEmitter, {
