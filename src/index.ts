@@ -157,10 +157,18 @@ class SignalExit extends SignalExitBase {
         // exit v4 are not aware of each other, and each will attempt to let
         // the other handle it, so neither of them do. To correct this, we
         // detect if we're the only handler *except* for previous versions
-        // of signal-exit.
+        // of signal-exit, and increment by the count of listeners it has
+        // created.
         /* c8 ignore start */
-        //@ts-ignore
-        if (typeof process.__signal_exit_emitter__ === 'object') count++
+        const p = process as unknown as {
+          __signal_exit_emitter__?: { count: number }
+        }
+        if (
+          typeof p.__signal_exit_emitter__ === 'object' &&
+          typeof p.__signal_exit_emitter__.count === 'number'
+        ) {
+          count += p.__signal_exit_emitter__.count
+        }
         /* c8 ignore stop */
         if (listeners.length === count) {
           this.unload()
