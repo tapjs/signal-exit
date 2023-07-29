@@ -15,10 +15,6 @@
   longer exists.
 - `SIGABRT`, `SIGALRM` removed from list of Windows signals, as
   the are not supported.
-- The `process.exitCode` is no longer set automatically prior to
-  calling the `onExit` callback. Instead, the effective exit code
-  is set in the arguments to the `onExit` handler.
-  `process.exitCode` is not directly touched by this module.
 
 ## 3.0.3 (2020-03-26)
 
