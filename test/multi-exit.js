@@ -54,7 +54,9 @@ opts.forEach(function (opt) {
         res.actualSignal = null
       }
       res.stderr = stderr.trim().split('\n')
-      t.same(res, expect[opt])
+      if (!t.same(res, expect[opt], opt)) {
+        console.error([opt, { ...(err || {})}, res, expect[opt]])
+      }
       t.end()
     })
   })

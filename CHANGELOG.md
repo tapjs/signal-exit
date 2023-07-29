@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1
+
+- Add the ability to capture signal exits by returning `true`
+  from the `onExit` listener.
+
 ## 4.0
 
 - Rewritten in TypeScript

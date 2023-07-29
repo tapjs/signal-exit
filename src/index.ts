@@ -28,16 +28,27 @@ const ObjectDefineProperty = Object.defineProperty.bind(Object)
 
 /**
  * A function that takes an exit code and signal as arguments
+ *
+ * In the case of signal exits *only*, a return value of true
+ * will indicate that the signal is being handled, and we should
+ * not synthetically exit with the signal we received. Regardless
+ * of the handler return value, the handler is unloaded when an
+ * otherwise fatal signal is received, so you get exactly 1 shot
+ * at it, unless you add another onExit handler at that point.
+ *
+ * In the case of numeric code exits, we may already have committed
+ * to exiting the process, for example via a fatal exception or
+ * unhandled promise rejection, so it is impossible to stop safely.
  */
 export type Handler = (
   code: number | null | undefined,
   signal: NodeJS.Signals | null
-) => any
+) => true | void
 type ExitEvent = 'afterExit' | 'exit'
 type Emitted = { [k in ExitEvent]: boolean }
 type Listeners = { [k in ExitEvent]: Handler[] }
 
-// teeny tiny ee
+// teeny special purpose ee
 class Emitter {
   emitted: Emitted = {
     afterExit: false,
@@ -87,14 +98,19 @@ class Emitter {
     ev: ExitEvent,
     code: number | null | undefined,
     signal: NodeJS.Signals | null
-  ) {
+  ): boolean {
     if (this.emitted[ev]) {
-      return
+      return false
     }
     this.emitted[ev] = true
+    let ret: boolean = false
     for (const fn of this.listeners[ev]) {
-      fn(code, signal)
+      ret = fn(code, signal) === true || ret
     }
+    if (ev === 'exit') {
+      ret = this.emit('afterExit', code, signal) || ret
+    }
+    return ret
   }
 }
 
@@ -172,10 +188,10 @@ class SignalExit extends SignalExitBase {
         /* c8 ignore stop */
         if (listeners.length === count) {
           this.unload()
-          this.#emitter.emit('exit', null, sig)
-          this.#emitter.emit('afterExit', null, sig)
+          const ret = this.#emitter.emit('exit', null, sig)
           /* c8 ignore start */
-          process.kill(process.pid, sig === 'SIGHUP' ? this.#hupSig : sig)
+          const s = sig === 'SIGHUP' ? this.#hupSig : sig
+          if (!ret) process.kill(process.pid, s)
           /* c8 ignore stop */
         }
       }
@@ -269,7 +285,6 @@ class SignalExit extends SignalExitBase {
     /* c8 ignore stop */
 
     this.#emitter.emit('exit', this.#process.exitCode, null)
-    this.#emitter.emit('afterExit', this.#process.exitCode, null)
     return this.#originalProcessReallyExit.call(
       this.#process,
       this.#process.exitCode
@@ -287,7 +302,6 @@ class SignalExit extends SignalExitBase {
       const ret = og.call(this.#process, ev, ...args)
       /* c8 ignore start */
       this.#emitter.emit('exit', this.#process.exitCode, null)
-      this.#emitter.emit('afterExit', this.#process.exitCode, null)
       /* c8 ignore stop */
       return ret
     } else {
