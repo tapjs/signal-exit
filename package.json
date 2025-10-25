@@ -52,8 +52,7 @@
     "signal",
     "exit"
   ],
-  "author": "Ben Coe <ben@npmjs.com>",
-  "license": "ISC",
+  "license": "BlueOak-1.0.0",
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
     "@types/node": "^18.15.11",
