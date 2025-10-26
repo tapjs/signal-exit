@@ -104,7 +104,7 @@ class Emitter {
     }
     this.emitted[ev] = true
     let ret: boolean = false
-    for (const fn of this.listeners[ev]) {
+    for (const fn of [...this.listeners[ev]]) {
       ret = fn(code, signal) === true || ret
     }
     if (ev === 'exit') {
