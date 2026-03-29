@@ -35,7 +35,7 @@ if (process.platform !== 'win32') {
     'SIGXCPU',
     'SIGXFSZ',
     'SIGUSR2',
-    'SIGTRAP',
+  //'SIGTRAP',
     'SIGSYS',
     'SIGQUIT',
     'SIGIOT'
@@ -43,6 +43,9 @@ if (process.platform !== 'win32') {
     // see #21
     // 'SIGPROF'
   )
+  if (!process.versions.electron) {
+    signals.push('SIGTRAP');
+  }
 }
 
 if (process.platform === 'linux') {
